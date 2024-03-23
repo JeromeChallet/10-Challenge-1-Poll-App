@@ -14,7 +14,7 @@ What is your favourite programming language?
 3: C++
 (Write option number)
 1.2. Based on the input number, update the 'answers' array property. For
-example, if the option is 3, increase the value at position 3 of the array by
+example, if the option is 3, increase the value at position 3 of the array by 1
 1. Make sure to check if the input is a number and if the number makes
 sense (e.g. answer 52 wouldn't make sense, right?)
 2. Call this method whenever the user clicks the "Answer poll" button.
@@ -35,13 +35,27 @@ Test data for bonus:
 Hints: Use many of the tools you learned about in this and the last section
 */
 
-// 1.2. Based on the input number, update the 'answers' array property. For
-// example, if the option is 3, increase the value at position 3 of the array by
+// 1. Make sure to check if the input is a number and if the number makes
+// sense (e.g. answer 52 wouldn't make sense, right?)
+// 2. Call this method whenever the user clicks the "Answer poll" button.
 
 const poll = {
-  question: "What is your favourite programming language?",
-  options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
+  question: 'What is your favourite programming language?',
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
   // This generates [0, 0, 0, 0]. More in the next section!
   answers: new Array(4).fill(0),
-  registerNewAnswer: prompt((question, options), number),
+  registerNewAnswer: function () {
+    let answer = parseInt(
+      prompt(this.question + '\n' + this.options.join('\n'))
+    );
+    console.log('answer: ', answer);
+    if (Number.isInteger(answer) && answer >= 0 && answer <= 3) {
+      this.answers[answer]++;
+    } else {
+      alert('please only a nb 0 to 3');
+    }
+  },
 };
+console.log('poll array 1: ', poll.answers);
+poll.registerNewAnswer();
+console.log('poll array 2: ', poll.answers);
