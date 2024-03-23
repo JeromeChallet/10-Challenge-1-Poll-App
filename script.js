@@ -35,10 +35,6 @@ Test data for bonus:
 Hints: Use many of the tools you learned about in this and the last section
 */
 
-// 1. Make sure to check if the input is a number and if the number makes
-// sense (e.g. answer 52 wouldn't make sense, right?)
-// 2. Call this method whenever the user clicks the "Answer poll" button.
-
 const poll = {
   question: 'What is your favourite programming language?',
   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
@@ -48,14 +44,28 @@ const poll = {
     let answer = parseInt(
       prompt(this.question + '\n' + this.options.join('\n'))
     );
-    console.log('answer: ', answer);
     if (Number.isInteger(answer) && answer >= 0 && answer <= 3) {
       this.answers[answer]++;
+      console.log('poll array 2: ', poll.answers);
     } else {
       alert('please only a nb 0 to 3');
+    }
+  this.displayResults();
+  },
+
+  displayResults: function (type) {
+    if (type === "array") {
+      console.log();
+    } else {
+      console.log('Poll results are ' + );
     }
   },
 };
 console.log('poll array 1: ', poll.answers);
-poll.registerNewAnswer();
-console.log('poll array 2: ', poll.answers);
+
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+poll.displayResults('string');
+poll.displayResults('array');
